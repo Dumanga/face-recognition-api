@@ -8,7 +8,7 @@ export default function FaceDetector() {
   const [fileURL, setFileURL] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const MODEL_URL = import.meta.env.BASE_URL + 'models/';
+  const MODEL_URL = import.meta.env.BASE_URL + '/models/';
 
   // Loading the SSD-Mobilenet model 
   useEffect(() => {
