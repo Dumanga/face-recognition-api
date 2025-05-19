@@ -8,14 +8,14 @@ export default function FaceDetector() {
   const [fileURL, setFileURL] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const MODEL_URL = import.meta.env.BASE_URL + '/models/';
 
   // Loading the SSD-Mobilenet model 
   useEffect(() => {
+    const MODEL_URL = import.meta.env.BASE_URL + '/models/';
     faceapi.nets.ssdMobilenetv1
       .loadFromUri(MODEL_URL)
-          .then(() => console.log('SSD-Mobilenet loaded'))
-          .catch(err => console.error(err));
+      .then(() => console.log('SSD-Mobilenet loaded'))
+      .catch(err => console.error(err));
   }, []);
 
   // Uploading the image
