@@ -3,17 +3,19 @@ import { Box, Button, Typography, Stack } from '@mui/material';
 import * as faceapi from 'face-api.js';
 
 export default function FaceDetector() {
-  const imgRef    = useRef(null);
+  const imgRef = useRef(null);
   const canvasRef = useRef(null);
   const [fileURL, setFileURL] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  const MODEL_URL = import.meta.env.BASE_URL + 'models/';
+
   // Loading the SSD-Mobilenet model 
   useEffect(() => {
     faceapi.nets.ssdMobilenetv1
-      .loadFromUri('/models')
-      .then(() => console.log('SSD-Mobilenet loaded'))
-      .catch(err => console.error(err));
+      .loadFromUri(MODEL_URL)
+          .then(() => console.log('SSD-Mobilenet loaded'))
+          .catch(err => console.error(err));
   }, []);
 
   // Uploading the image
@@ -37,6 +39,7 @@ export default function FaceDetector() {
 
     const options = new faceapi.SsdMobilenetv1Options({ minConfidence: 0.5 });
     const detections = await faceapi.detectAllFaces(imgRef.current, options);
+    console.log('Detected faces:', detections);
 
     const canvas = canvasRef.current;
     faceapi.matchDimensions(canvas, {
